@@ -13,13 +13,13 @@ WEBAPP_URL = "https://avto-test-uz-three.vercel.app"
 QOIDALAR_URL = "https://lex.uz/acts/-2850459"
 
 # Admin Telegram ID — siz o'zingiznikini qo'ying
-ADMIN_ID = int(os.environ.get("ADMIN_ID", "1234567890"))
+ADMIN_ID = int(os.environ.get("ADMIN_ID", "6498632307"))
 
 # To'lov ma'lumotlari
-CLICK_NUMBER = os.environ.get("CLICK_NUMBER", "9901234567")   # Click raqamingiz
-PAYME_NUMBER = os.environ.get("PAYME_NUMBER", "9901234567")   # Payme raqamingiz
-CARD_NUMBER  = os.environ.get("CARD_NUMBER",  "8600 0000 0000 0000")  # Karta raqamingiz
-CARD_OWNER   = os.environ.get("CARD_OWNER",   "Valiyev Kamron")
+CLICK_NUMBER = os.environ.get("CLICK_NUMBER", "+998916850336")   # Click raqamingiz
+PAYME_NUMBER = os.environ.get("PAYME_NUMBER", "+998916850336")   # Payme raqamingiz
+CARD_NUMBER  = os.environ.get("CARD_NUMBER",  " 9860 1266 7183 6719 ")  # Karta raqamingiz
+CARD_OWNER   = os.environ.get("CARD_OWNER",   "M. M")
 
 # Narxlar (so'm)
 PRICES = {
