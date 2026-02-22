@@ -79,7 +79,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     text = (
         f"👋 Assalomu alaykum, *{user.first_name}*!\n\n"
-        "🚗 *AvtoTest.Uz* botiga xush kelibsiz!\n\n"
+        "🚗 *RuldaTest.uz* botiga xush kelibsiz!\n\n"
         "Bu bot orqali siz:\n"
         "✅ Haydovchilik testlarini topshirishingiz\n"
         "📚 Yo'l harakati qoidalarini o'rganishingiz\n"
