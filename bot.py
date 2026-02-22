@@ -139,7 +139,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🚗 *Testni boshlash* — Haydovchilik testini topshirish\n"
             "📚 *Qoidalar kitobi* — Yo'l harakati qoidalari\n"
             "📊 *Statistika* — Umumiy statistika\n\n"
-            "❓ Muammo bo'lsa: @admin ga yozing",
+            "❓ Muammo bo'lsa: @Kamron201 ga yozing",
             parse_mode="Markdown"
         )
 
