@@ -18,8 +18,8 @@ ADMIN_ID = int(os.environ.get("ADMIN_ID", "6498632307"))
 # To'lov ma'lumotlari
 CLICK_NUMBER = os.environ.get("CLICK_NUMBER", "+998916850336")   # Click raqamingiz
 PAYME_NUMBER = os.environ.get("PAYME_NUMBER", "+998916850336")   # Payme raqamingiz
-CARD_NUMBER  = os.environ.get("CARD_NUMBER",  " 9860 1266 7183 6719 ")  # Karta raqamingiz
-CARD_OWNER   = os.environ.get("CARD_OWNER",   "M. M")
+CARD_NUMBER  = os.environ.get("CARD_NUMBER",  "9860 1266 7183 6719")  # Karta raqamingiz
+CARD_OWNER   = os.environ.get("CARD_OWNER",   "Valiyev Kamron")
 
 # Narxlar (so'm)
 PRICES = {
@@ -128,6 +128,14 @@ def activate_premium(user_id, username, full_name, plan_key):
     conn.commit()
     conn.close()
     return expires
+
+def generate_premium_code(plan_key):
+    """Sayt uchun maxsus premium kod yaratish"""
+    import random, string
+    days = PRICES[plan_key]["days"]
+    chars = string.ascii_uppercase + string.digits
+    uid = ''.join(random.choices(chars, k=4))
+    return f"PREM-{uid}-{days}"
 
 def save_payment_request(user_id, username, full_name, plan_key, price):
     conn = sqlite3.connect("stats.db")
@@ -443,13 +451,23 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         update_request_status(req_id, "approved")
         plan_label = PRICES.get(plan_key, {}).get("label", plan_key)
 
+        # Sayt uchun premium kod yaratish
+        premium_code = generate_premium_code(plan_key)
+
         # Foydalanuvchiga xabar
         try:
             await context.bot.send_message(
                 target_user_id,
-                f"🎉 *Tabriklaymiz! Premium faollashtirildi!*\n\n"
+                f"🎉 *Tabriklaymiz! Premium tasdiqlandi!*\n\n"
                 f"📦 Paket: *{plan_label}*\n"
                 f"📅 Muddati: *{expires.strftime('%d.%m.%Y')}* gacha\n\n"
+                f"🔑 *Sayt uchun premium kod:*\n"
+                f"`{premium_code}`\n\n"
+                f"📌 *Qanday ishlatish:*\n"
+                f"1️⃣ Saytga kiring\n"
+                f"2️⃣ Dashboard da ⭐ Premium tugmasini bosing\n"
+                f"3️⃣ Yuqoridagi kodni kiriting\n"
+                f"4️⃣ Faollashtirish bosing\n\n"
                 f"✅ Cheksiz test\n"
                 f"✅ Xatolar tahlili\n"
                 f"✅ Real imtihon simulyatori\n\n"
