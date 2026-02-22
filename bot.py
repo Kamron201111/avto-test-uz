@@ -13,12 +13,12 @@ WEBAPP_URL = "https://avto-test-uz-three.vercel.app"
 QOIDALAR_URL = "https://lex.uz/acts/-2850459"
 
 # Admin Telegram ID — siz o'zingiznikini qo'ying
-ADMIN_ID = int(os.environ.get("ADMIN_ID", "6498632307"))
+ADMIN_ID = int(os.environ.get("ADMIN_ID", "1234567890"))
 
 # To'lov ma'lumotlari
-CLICK_NUMBER = os.environ.get("CLICK_NUMBER", "+998916850336")   # Click raqamingiz
-PAYME_NUMBER = os.environ.get("PAYME_NUMBER", "+998916850336")   # Payme raqamingiz
-CARD_NUMBER  = os.environ.get("CARD_NUMBER",  "9860 1266 7183 6719")  # Karta raqamingiz
+CLICK_NUMBER = os.environ.get("CLICK_NUMBER", "9901234567")   # Click raqamingiz
+PAYME_NUMBER = os.environ.get("PAYME_NUMBER", "9901234567")   # Payme raqamingiz
+CARD_NUMBER  = os.environ.get("CARD_NUMBER",  "8600 0000 0000 0000")  # Karta raqamingiz
 CARD_OWNER   = os.environ.get("CARD_OWNER",   "Valiyev Kamron")
 
 # Narxlar (so'm)
@@ -338,7 +338,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode="Markdown",
                     reply_markup=InlineKeyboardMarkup([
                         [
-                            InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"approve_{req_id}_{uid}_{plan}"),
+                            InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"approve_{req_id}_{uid}__{plan}"),
                             InlineKeyboardButton("❌ Rad etish", callback_data=f"reject_{req_id}_{uid}")
                         ]
                     ])
@@ -415,7 +415,7 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup([
                 [
-                    InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"approve_{req_id}_{user.id}_{plan_key}"),
+                    InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"approve_{req_id}_{user.id}__{plan_key}"),
                     InlineKeyboardButton("❌ Rad etish", callback_data=f"reject_{req_id}_{user.id}")
                 ]
             ])
@@ -435,10 +435,14 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user.id != ADMIN_ID:
             await query.answer("Sizda huquq yo'q!", show_alert=True)
             return
-        parts = data.split("_")
-        req_id = int(parts[1])
-        target_user_id = int(parts[2])
-        plan_key = parts[3]
+        # format: approve_{req_id}_{user_id}__{plan_key}
+        without_prefix = data[len("approve_"):]  # req_id_{user_id}__{plan_key}
+        double_idx = without_prefix.index("__")
+        before = without_prefix[:double_idx]   # req_id_{user_id}
+        plan_key = without_prefix[double_idx+2:]  # plan_key (1_hafta, 1_oy, 3_oy)
+        id_parts = before.split("_")
+        req_id = int(id_parts[0])
+        target_user_id = int(id_parts[1])
 
         # Foydalanuvchi ma'lumotlarini olish
         conn = sqlite3.connect("stats.db")
