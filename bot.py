@@ -2,7 +2,7 @@ import os
 import sqlite3
 import logging
 from datetime import datetime
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -97,7 +97,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = InlineKeyboardMarkup([
             [InlineKeyboardButton(
                 "📝 Testni ochish",
-                web_app=WebAppInfo(url=WEBAPP_URL)
+                url=WEBAPP_URL
             )]
         ])
         await update.message.reply_text(
@@ -139,7 +139,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🚗 *Testni boshlash* — Haydovchilik testini topshirish\n"
             "📚 *Qoidalar kitobi* — Yo'l harakati qoidalari\n"
             "📊 *Statistika* — Umumiy statistika\n\n"
-            "❓ Muammo bo'lsa: @Kamron201 ga yozing",
+            "❓ Muammo bo'lsa: @admin ga yozing",
             parse_mode="Markdown"
         )
 
