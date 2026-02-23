@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "8570122455:AAG63c-ta1bigTRLkaj76GFXiF3a4wiY7IM")
 WEBAPP_URL = "https://avto-test-uz-three.vercel.app"
 QOIDALAR_URL = "https://lex.uz/acts/-2850459"
-ADMIN_ID = int(os.environ.get("ADMIN_ID", "1234567890"))
+ADMIN_ID = int(os.environ.get("ADMIN_ID", "6498632307"))
 
 # =================== DATABASE ===================
 def init_db():
