@@ -429,6 +429,7 @@ async def handle_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except:
         total_users = total_q = total_tests = active_premium = pending = 0
 
+    pending_msg = f"🔴 {pending} ta yangi premium so'rov bor!" if pending > 0 else "✅ Yangi so'rovlar yo'q"
     text = (
         f"🔑 *Admin Panel*\n\n"
         f"👥 Foydalanuvchilar: *{total_users}*\n"
@@ -436,7 +437,7 @@ async def handle_admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🧪 Testlar: *{total_tests}*\n"
         f"👑 Aktiv Premium: *{active_premium}*\n"
         f"⏳ Kutilayotgan so'rovlar: *{pending}*\n\n"
-        f"{'🔴 ' + str(pending) + ' ta yangi premium so'rov bor!' if pending > 0 else '✅ Yangi so'rovlar yo'q'}"
+        f"{pending_msg}"
     )
 
     buttons = [
