@@ -29,7 +29,7 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8570122455:AAG63c-ta1bigTRLkaj76GFXiF3a4wiY7IM")
 ADMIN_ID = int(os.getenv("ADMIN_ID", "6498632307"))
 SUPABASE_URL = os.getenv("SUPABASE_URL", "https://bwdnvxucvyeknesifnwg.supabase.co")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "sb_publishable_Wn3kdqlj3_w9tIZZX83rYw_sB-23j8v")
 WEB_APP_URL = os.getenv("WEB_APP_URL", "https://avto-test-uz-three.vercel.app")
 FREE_DAILY_LIMIT = 20
 
