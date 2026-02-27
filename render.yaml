@@ -7,3 +7,11 @@ services:
     envVars:
       - key: BOT_TOKEN
         value: 8570122455:AAG63c-ta1bigTRLkaj76GFXiF3a4wiY7IM
+      - key: ADMIN_ID
+        value: 1935541521
+      - key: SUPABASE_URL
+        value: https://bwdnvxucvyeknesifnwg.supabase.co
+      - key: SUPABASE_KEY
+        sync: false
+      - key: WEBAPP_URL
+        value: https://avto-test-uz-three.vercel.app
