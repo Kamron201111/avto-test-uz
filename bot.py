@@ -1,6 +1,6 @@
 """
 ╔══════════════════════════════════════════════╗
-║        AvtoTest.Uz — Telegram Bot v3.0        ║
+║        AvtoTest.Uz - Telegram Bot v3.0        ║
 ║   To'liq test tizimi + Admin + Premium        ║
 ╚══════════════════════════════════════════════╝
 """
@@ -281,9 +281,9 @@ def kb_premium_plans(prices: dict):
     p2 = int(prices.get("price_1_oy", 49000))
     p3 = int(prices.get("price_1_yil", 149000))
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton(f"📅 1 Hafta — {p1:,} so'm", callback_data="buy:hafta")],
-        [InlineKeyboardButton(f"🔥 1 Oy — {p2:,} so'm  ← ENG MASHHUR", callback_data="buy:oy")],
-        [InlineKeyboardButton(f"💎 1 Yil — {p3:,} so'm  ← ENG TEJAMKOR", callback_data="buy:yil")],
+        [InlineKeyboardButton(f"📅 1 Hafta - {p1:,} so'm", callback_data="buy:hafta")],
+        [InlineKeyboardButton(f"🔥 1 Oy - {p2:,} so'm  ← ENG MASHHUR", callback_data="buy:oy")],
+        [InlineKeyboardButton(f"💎 1 Yil - {p3:,} so'm  ← ENG TEJAMKOR", callback_data="buy:yil")],
         [InlineKeyboardButton("🔙 Orqaga", callback_data="nav:back")],
     ])
 
@@ -350,7 +350,7 @@ async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     pinfo = await get_premium_info(u.id) if prem else {}
 
     limit_text = "♾️ Cheksiz" if prem else f"{FREE_LIMIT - used}/{FREE_LIMIT} ta"
-    badge = f"👑 *PREMIUM* — {pinfo.get('days_left', 0)} kun qoldi" if prem else "🆓 Bepul foydalanuvchi"
+    badge = f"👑 *PREMIUM* - {pinfo.get('days_left', 0)} kun qoldi" if prem else "🆓 Bepul foydalanuvchi"
 
     text = (
         f"🚗 *AvtoTest.Uz*\n"
@@ -363,8 +363,8 @@ async def cmd_start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         f"✅ Har xatoga batafsil izoh\n"
         f"✅ Shaxsiy statistika va tarixingiz\n"
         f"✅ 🏆 Reyting tizimi\n"
-        f"{'✅ 🎬 Video kurslar (20 ta dars)' if prem else '🔒 Video kurslar — Premium'}\n"
-        f"{'✅ 📖 YHQ barcha 29 bob' if prem else '🔒 YHQ to\\'liq — Premium'}\n\n"
+        ("✅ 🎬 Video kurslar (20 ta dars)" if prem else "🔒 Video kurslar - Premium") + "\n" +
+        ("✅ 📖 YHQ barcha 29 bob" if prem else "🔒 YHQ toliq - Premium") + "\n\n" +
         f"👇 Boshlang!"
     )
     await update.message.reply_text(
@@ -446,7 +446,7 @@ async def stats_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     streak_txt = f"\n🔥 *{streak} kunlik seriya!* Davom eting!" if streak > 1 else ""
 
     text = (
-        f"📊 *{u.first_name} — Natijalarim*\n"
+        f"📊 *{u.first_name} - Natijalarim*\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"{badge}  |  Limit: `{limit_txt}`{streak_txt}\n\n"
         f"*📈 Umumiy:*\n"
@@ -469,7 +469,7 @@ async def stats_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         tq = res["total_questions"]
         cc = res["correct_count"]
         em = "✅" if sc >= PASS_SCORE else "❌"
-        text += f"{em} *{sc}%* — {cc}/{tq} savol • {d}\n"
+        text += f"{em} *{sc}%* - {cc}/{tq} savol • {d}\n"
 
     await update.message.reply_text(text, parse_mode="Markdown")
 
@@ -491,7 +491,7 @@ async def leaderboard_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         pts = row.get("total_points", 0)
         em = rank_medal(i)
         is_me = row.get("id") == uid(u.id)
-        line = f"{em} *{name}* — {pts} ball"
+        line = f"{em} *{name}* - {pts} ball"
         if is_me:
             line += " ← Siz"
             my_rank = i + 1
@@ -513,14 +513,14 @@ async def premium_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
     if pinfo.get("active"):
         text = (
-            f"👑 *Premium — Faol!*\n\n"
+            f"👑 *Premium - Faol!*\n\n"
             f"📦 Tarif: *{pinfo['plan']}*\n"
             f"📅 Tugash sanasi: *{pinfo['expires']}*\n"
             f"⏳ Qoldi: *{pinfo['days_left']} kun*\n\n"
             f"*Sizda mavjud:*\n"
             f"✅ Cheksiz kunlik testlar\n"
             f"✅ 20 ta video dars (Kurslar)\n"
-            f"✅ YHQ kitob — barcha 29 bob\n"
+            f"✅ YHQ kitob - barcha 29 bob\n"
             f"✅ Har xatoga batafsil izoh\n"
             f"✅ Reyting imtiyozlari\n\n"
             f"🚗 Saytda ham barcha imkoniyatlar ochiq!"
@@ -542,15 +542,15 @@ async def premium_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         f"*Premium bilan nima olasiz?*\n\n"
         f"♾️  Cheksiz kunlik testlar\n"
         f"🎬  20 ta video dars (Kurslar bo'limi)\n"
-        f"📖  YHQ kitob — barcha 29 bob\n"
+        f"📖  YHQ kitob - barcha 29 bob\n"
         f"🔍  Har xatoga batafsil izoh va tushuntirish\n"
         f"🏆  Reytingda premium nishon\n"
         f"📊  Kengaytirilgan statistika\n\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n"
         f"💰 *Narxlar:*\n\n"
-        f"📅  1 Hafta — *{p1:,} so'm*\n"
-        f"🔥  1 Oy    — *{p2:,} so'm*   ← Ko'pchilik tanlaydi\n"
-        f"💎  1 Yil   — *{p3:,} so'm*   ← Eng tejamkor\n\n"
+        f"📅  1 Hafta - *{p1:,} so'm*\n"
+        f"🔥  1 Oy    - *{p2:,} so'm*   ← Ko'pchilik tanlaydi\n"
+        f"💎  1 Yil   - *{p3:,} so'm*   ← Eng tejamkor\n\n"
         f"👇 Tarif tanlang:"
     )
     await update.message.reply_text(text, parse_mode="Markdown",
@@ -562,10 +562,10 @@ async def premium_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 async def site_msg(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     prem = await is_premium(update.effective_user.id)
     text = (
-        f"🌐 *AvtoTest.Uz — To'liq Platforma*\n\n"
+        f"🌐 *AvtoTest.Uz - To'liq Platforma*\n\n"
         f"Saytda qo'shimcha imkoniyatlar:\n"
         f"{'✅' if prem else '🔒'} Video kurslar (20 ta dars)\n"
-        f"{'✅' if prem else '🔒'} YHQ — barcha 29 bob\n"
+        f"{'✅' if prem else '🔒'} YHQ - barcha 29 bob\n"
         f"✅ Test tarixingiz\n"
         f"✅ Premium boshqaruv\n\n"
         f"👇 Ochish:"
@@ -780,7 +780,7 @@ async def _finish_quiz(chat_id: int, u, ctx: ContextTypes.DEFAULT_TYPE):
         ],
     ]
     if not prem:
-        btns.append([InlineKeyboardButton("⭐ Premium — Cheksiz test!", callback_data="nav:premium")])
+        btns.append([InlineKeyboardButton("⭐ Premium - Cheksiz test!", callback_data="nav:premium")])
     btns.append([InlineKeyboardButton("🏠 Bosh menu", callback_data="nav:back")])
 
     await ctx.bot.send_message(chat_id, text, parse_mode="Markdown",
@@ -907,7 +907,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         card_typ = s.get("card_type", "Humo")
 
         await q.edit_message_text(
-            f"{em} *{pname} Premium — {price:,} so'm*\n"
+            f"{em} *{pname} Premium - {price:,} so'm*\n"
             f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
             f"*💳 To'lov rekvizitlari:*\n"
             f"🔢 Karta:   `{card_num}`\n"
@@ -919,7 +919,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             f"2️⃣ To'lov chekini screenshot oling\n"
             f"3️⃣ @kamron201 ga chekni yuboring\n"
             f"4️⃣ Admin *{days} kunlik* Premiumni faollashtiradi\n\n"
-            f"⏱ Odatdagi tasdiqlash vaqti: *1–3 soat*",
+            f"⏱ Odatdagi tasdiqlash vaqti: *1-3 soat*",
             parse_mode="Markdown",
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("📸 Chekni yuborish → @kamron201", url="https://t.me/kamron201")],
@@ -942,7 +942,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             prices = await get_settings("price_1_hafta","price_1_oy","price_1_yil")
             p2 = int(prices.get("price_1_oy", 49000))
             await q.edit_message_text(
-                f"⭐ *Premium Obuna*\n\n♾️ Cheksiz testlar\n🎬 Video kurslar\n📖 YHQ kitob\n\n💰 1 Oy — *{p2:,} so'm* 🔥\n\n👇 Tarif tanlang:",
+                f"⭐ *Premium Obuna*\n\n♾️ Cheksiz testlar\n🎬 Video kurslar\n📖 YHQ kitob\n\n💰 1 Oy - *{p2:,} so'm* 🔥\n\n👇 Tarif tanlang:",
                 parse_mode="Markdown", reply_markup=kb_premium_plans(prices)
             )
         elif dest == "stats":
@@ -978,7 +978,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                 ur=qr=tr=pr=pnd=new_today=_Z()
 
             text = (
-                f"📊 *Admin — Statistika*\n"
+                f"📊 *Admin - Statistika*\n"
                 f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
                 f"👥 Jami foydalanuvchilar: *{ur.count}*\n"
                 f"🆕 Bugun qo'shildi: *{new_today.count}*\n"
@@ -995,7 +995,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
             top = await get_leaderboard()
             text = f"🏆 *Top-10 Reyting*\n{'━'*22}\n\n"
             for i, row in enumerate(top):
-                text += f"{rank_medal(i)} {(row.get('name') or '?')[:18]} — *{row.get('total_points',0)}* ball\n"
+                text += f"{rank_medal(i)} {(row.get('name') or '?')[:18]} - *{row.get('total_points',0)}* ball\n"
             await q.edit_message_text(text, parse_mode="Markdown",
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙",callback_data="adm:back")]]))
 
@@ -1088,7 +1088,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                     )
                 except: pass
                 await q.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(f"✅ Tasdiqlangan — {req.get('user_name','?')}", callback_data="noop")]
+                    [InlineKeyboardButton(f"✅ Tasdiqlangan - {req.get('user_name','?')}", callback_data="noop")]
                 ]))
             else:
                 await q.edit_message_text("❌ Faollashtrishda xato!")
@@ -1110,7 +1110,7 @@ async def on_callback(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
                         parse_mode="Markdown")
                 except: pass
                 await q.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(f"❌ Rad etildi — {req.get('user_name','?')}", callback_data="noop")]
+                    [InlineKeyboardButton(f"❌ Rad etildi - {req.get('user_name','?')}", callback_data="noop")]
                 ]))
         except Exception as e:
             await q.edit_message_text(f"❌ Xato: {e}")
@@ -1138,7 +1138,7 @@ async def handle_admin_text(update: Update, ctx: ContextTypes.DEFAULT_TYPE) -> b
                 tg_id = int(row["id"].replace("user_","").split("_")[0])
                 await ctx.bot.send_message(
                     tg_id,
-                    f"📢 *AvtoTest.Uz — Yangilik!*\n\n{text}\n\n🌐 {WEBAPP_URL}",
+                    f"📢 *AvtoTest.Uz - Yangilik!*\n\n{text}\n\n🌐 {WEBAPP_URL}",
                     parse_mode="Markdown"
                 )
                 sent += 1
@@ -1244,18 +1244,18 @@ async def cmd_admin_cmd(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 
 async def cmd_help(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        f"🤖 *AvtoTest.Uz Bot v3.0 — Yordam*\n"
+        f"🤖 *AvtoTest.Uz Bot v3.0 - Yordam*\n"
         f"━━━━━━━━━━━━━━━━━━━━━━\n\n"
         f"*📌 Buyruqlar:*\n"
-        f"/start   — Bosh menyu\n"
-        f"/test    — Test boshlash\n"
-        f"/stats   — Natijalarim\n"
-        f"/top     — Reyting\n"
-        f"/premium — Premium ma'lumot\n"
-        f"/help    — Yordam\n\n"
+        f"/start   - Bosh menyu\n"
+        f"/test    - Test boshlash\n"
+        f"/stats   - Natijalarim\n"
+        f"/top     - Reyting\n"
+        f"/premium - Premium ma'lumot\n"
+        f"/help    - Yordam\n\n"
         f"*📌 Qanday ishlaydi?*\n"
         f"1️⃣ Test boshlang (10/20/30/40 savol)\n"
-        f"2️⃣ Har savolga F1–F4 dan javob bering\n"
+        f"2️⃣ Har savolga F1-F4 dan javob bering\n"
         f"3️⃣ Har javobdan keyin to'g'ri javob ko'rinadi\n"
         f"4️⃣ Test tugagach batafsil natija chiqadi\n\n"
         f"*📌 Bepul:* kuniga {FREE_LIMIT} ta test\n"
