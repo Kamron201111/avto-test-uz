@@ -657,7 +657,7 @@ async def _send_admin_panel(send_fn):
         f"👑 Aktiv Premium: *{active_p}*\n"
         f"⏳ Kutilayotgan so'rovlar: *{pending}*\n\n"
         f"🕐 {datetime.now().strftime('%d.%m.%Y %H:%M')}\n\n"
-        f"{'🔴 *' + str(pending) + \" ta yangi so'rov bor!*\" if pending else '✅ Yangi so\\'rovlar yo\\'q'}"
+        ("🔴 *" + str(pending) + " ta yangi sorov bor!*" if pending else "✅ Yangi sorovlar yoq")
     )
     await send_fn(text, parse_mode="Markdown", reply_markup=kb_admin_main())
 
