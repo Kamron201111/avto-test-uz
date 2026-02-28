@@ -267,7 +267,7 @@ def kb_answer(options: dict, qid: str):
     btns = []
     for k, v in options.items():
         if not v: continue
-        short = (v[:40] + "…") if len(v) > 40 else v
+        short = (v[:40] + "...") if len(v) > 40 else v
         btns.append([InlineKeyboardButton(f"{labels[k]}. {short}", callback_data=f"ans:{qid}:{k}")])
     return InlineKeyboardMarkup(btns)
 
@@ -747,7 +747,7 @@ async def _finish_quiz(chat_id: int, u, ctx: ContextTypes.DEFAULT_TYPE):
         for wq in wrong_qs[:5]:
             rk = wq["correct_answer"]
             rv = wq.get(f"option_{rk.lower()}", "")
-            q_short = wq["question_text"][:55] + ("…" if len(wq["question_text"]) > 55 else "")
+            q_short = wq["question_text"][:55] + ("..." if len(wq["question_text"]) > 55 else "")
             wrong_text += f"▪️ _{q_short}_\n   ✅ {labels[rk]}. {rv[:45]}\n"
         if len(wrong_qs) > 5:
             wrong_text += f"_...va yana {len(wrong_qs)-5} ta xato_\n"
