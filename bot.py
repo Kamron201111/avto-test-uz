@@ -9,7 +9,7 @@ logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=lo
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN  = os.environ.get("BOT_TOKEN", "8570122455:AAG63c-ta1bigTRLkaj76GFXiF3a4wiY7IM")
-WEBAPP_URL = "https://avto-test-uz-three.vercel.app"
+WEBAPP_URL = "https://ruldatest-three.vercel.app"
 ADMIN_URL  = "https://t.me/kamron201"
 
 # Stikerlar (Telegram standart stiker ID lari)
@@ -92,7 +92,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     text = (
         "👋 *Assalomu alaykum, " + user.first_name + "!*\n\n"
-        "🚗 *RuldaTest.uz* ga xush kelibsiz!\n\n"
+        "🚗 [RuldaTest.uz](" + WEBAPP_URL + ") ga xush kelibsiz!\n\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         "🎯 *Bu bot nimaga kerak?*\n\n"
         "✅ Haydovchilik imtihoniga tayyorlanish\n"
