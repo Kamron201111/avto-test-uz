@@ -6,7 +6,8 @@ from supabase import create_client, Client
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
 
-load_dotenv()
+# load_dotenv(override=False) — Railway Variables ustunlik qiladi, .env faqat local uchun
+load_dotenv(override=False)
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -18,9 +19,16 @@ ADMIN_URL  = "https://t.me/kamron201"
 CHANNEL_USERNAME = "@premium_milliy"
 CHANNEL_URL      = "https://t.me/premium_milliy"
 
-# Supabase
+# Supabase — Railway Variables dan olinadi
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
+
+logger.info(f"SUPABASE_URL: {SUPABASE_URL[:30] if SUPABASE_URL else 'EMPTY'}")
+logger.info(f"SUPABASE_KEY: {SUPABASE_KEY[:20] if SUPABASE_KEY else 'EMPTY'}...")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("SUPABASE_URL yoki SUPABASE_KEY Railway Variables da yo'q!")
+
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Stikerlar
