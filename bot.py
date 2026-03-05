@@ -145,7 +145,7 @@ def get_random_questions(count: int = 20) -> list:
     try:
         res = supabase.table("questions").select(
             "id, question_text, option_a, option_b, option_c, "
-            "option_d, option_e, option_f, correct_answer"
+            "option_d, option_e, option_f, correct_answer, image"
         ).execute()
         all_questions = res.data or []
         # Kamida 2 ta to'liq variant bor savollarni filtrlash
