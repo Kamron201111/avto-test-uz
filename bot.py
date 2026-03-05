@@ -270,6 +270,26 @@ async def send_quiz_to_chat(chat_id: int, context: ContextTypes.DEFAULT_TYPE) ->
             if len(q_text) > 255:
                 q_text = q_text[:252] + "..."
 
+            # Rasm bor-yo'qligini tekshirish
+            image_data = q.get("image") or ""
+
+            if image_data:
+                # Saytda rasm data:image/jpeg;base64,.... formatida saqlanadi
+                # (QuestionManager.tsx: canvas.toDataURL('image/jpeg', 0.7))
+                try:
+                    import base64, io
+                    raw = image_data.split(",", 1)[1]  # "data:image/jpeg;base64," ni olib tashlash
+                    img_bytes = base64.b64decode(raw)
+                    await context.bot.send_photo(
+                        chat_id=chat_id,
+                        photo=io.BytesIO(img_bytes),
+                        caption=f"🖼 *{q_text}*",
+                        parse_mode="Markdown",
+                    )
+                    await asyncio.sleep(1)
+                except Exception as img_exc:
+                    logger.warning(f"Rasm yuborishda xato (#{i}): {img_exc}")
+
             await context.bot.send_poll(
                 chat_id=chat_id,
                 question=q_text,
@@ -279,12 +299,12 @@ async def send_quiz_to_chat(chat_id: int, context: ContextTypes.DEFAULT_TYPE) ->
                 is_anonymous=True,
             )
 
-            # Flood limit dan saqlanish (Telegram: max 1 poll/sek)
-            await asyncio.sleep(1.5)
+            # Flood limitdan saqlanish — har 10 soniyada 1 ta savol
+            await asyncio.sleep(10)
 
         except Exception as exc:
             logger.error(f"Savol #{i} yuborishda xato: {exc}")
-            await asyncio.sleep(2)
+            await asyncio.sleep(10)
             continue
 
     # Yakuniy xabar
